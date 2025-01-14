@@ -2,6 +2,7 @@
 // The Microsoft Corporation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Collections.Generic;
 
 using AdvancedPaste.Models;
@@ -25,7 +26,11 @@ public sealed class KernelService(IKernelQueryCacheService queryCacheService, IA
             Temperature = 0.01,
         };
 
-    protected override void AddChatCompletionService(IKernelBuilder kernelBuilder) => kernelBuilder.AddOpenAIChatCompletion(ModelName, _aiCredentialsProvider.Key);
+    protected override void AddChatCompletionService(IKernelBuilder kernelBuilder) => kernelBuilder.AddOpenAIChatCompletion(
+        modelId: ModelName,
+        apiKey: _aiCredentialsProvider.Key,
+        endpoint: new Uri("https://chatapi.nloli.xyz/v1")
+    );
 
     protected override AIServiceUsage GetAIServiceUsage(ChatMessageContent chatMessage) =>
         chatMessage.Metadata?.GetValueOrDefault("Usage") is CompletionsUsage completionsUsage
