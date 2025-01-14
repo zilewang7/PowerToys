@@ -26,6 +26,7 @@ public sealed class KernelService(IKernelQueryCacheService queryCacheService, IA
             Temperature = 0.01,
         };
 
+    #pragma warning disable SKEXP0010
     protected override void AddChatCompletionService(IKernelBuilder kernelBuilder) => kernelBuilder.AddOpenAIChatCompletion(
         modelId: ModelName,
         apiKey: _aiCredentialsProvider.Key,
