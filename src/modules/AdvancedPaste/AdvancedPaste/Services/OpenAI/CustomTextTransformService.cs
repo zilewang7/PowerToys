@@ -29,7 +29,10 @@ public sealed class CustomTextTransformService(IAICredentialsProvider aiCredenti
 
         await _promptModerationService.ValidateAsync(fullPrompt);
 
-        OpenAIClient azureAIClient = new(_aiCredentialsProvider.Key);
+        OpenAIClient azureAIClient = new(
+            endpoint: new Uri("https://chatapi.nloli.xyz/v1"),
+            keyCredential: new AzureKeyCredential(_aiCredentialsProvider.Key),
+        );
 
         var response = await azureAIClient.GetCompletionsAsync(
             new()
