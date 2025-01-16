@@ -31,7 +31,7 @@ public sealed class CustomTextTransformService(IAICredentialsProvider aiCredenti
 
         OpenAIClient azureAIClient = new(
             endpoint: new Uri("https://chatapi.nloli.xyz/v1"),
-            keyCredential: new AzureKeyCredential(_aiCredentialsProvider.Key),
+            keyCredential: new AzureKeyCredential(_aiCredentialsProvider.Key)
         );
 
         var response = await azureAIClient.GetCompletionsAsync(
